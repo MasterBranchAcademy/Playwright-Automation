@@ -14,6 +14,6 @@ test.describe("Home Page Tests", () => {
   test("The home page should load successfully", async ({ page }) => {
     const HP = new Home_page(page);
 
-    await HP.is_home_page_displayed(data.urls.base_url, "test");
+    await HP.is_home_page_displayed(data.urls.base_url, "Login / Signup");
   });
 });

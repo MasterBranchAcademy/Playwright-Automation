@@ -1,6 +1,6 @@
 # README #
 
-### Dashboard automation project ###
+### Robotshop automation project ###
 
 * This playwright test automation is created to run on:
 
@@ -54,4 +54,4 @@ README.dm
     npx playwright test --workers=1 --ui --config=playwright.config.*dashboard*.js
 
   * run specific test in specific file
-    npx playwright test --workers=1 --config=playwright.config.*marketplace.js **003_Post*.spec.js
+    npx playwright test --workers=1 --config=playwright.config.*marketplace.js **003_Post**.spec.js

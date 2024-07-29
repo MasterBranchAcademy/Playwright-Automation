@@ -1,5 +1,6 @@
 {
     "urls":{
-        "base_url":"https://eu.robotshop.com/"
+        "base_url":"https://eu.robotshop.com/",
+        "adapters_cables_url": "https://eu.robotshop.com/collections/adapters-cables"
     }
 }
