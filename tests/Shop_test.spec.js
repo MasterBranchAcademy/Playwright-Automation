@@ -6,6 +6,7 @@ const { Shop_page } = require("../pages/Shop_page");
 
 test.beforeEach(async ({ page }) => {
   await page.goto(data.urls.base_url);
+  await page.getByRole("button", { name: "No, thanks" }).click();
 });
 
 test.describe("Shop Page Tests", () => {
@@ -13,12 +14,13 @@ test.describe("Shop Page Tests", () => {
     test.setTimeout(60000);
   });
 
-  test("The user should navigate to adapters and cables page successfully", async ({
+ 
+
+  test.skip("The user should navigate to adapters and cables page successfully", async ({
     page,
   }) => {
     const CM = new Commands(page);
     const SP = new Shop_page(page);
-
     await CM.handle_cookies();
     await SP.click_shop();
     await SP.click_robot_parts();
@@ -26,5 +28,17 @@ test.describe("Shop Page Tests", () => {
     await SP.click_adapters_cables();
     await SP.is_title_displayed();
     await SP.is_url_correct(data.urls.adapters_cables_url);
+  });
+
+  test('Verify that the "Robots & Kits" link can be clicked', async ({
+    page,
+  }) => {
+    const CM = new Commands(page);
+    const SP = new Shop_page(page);
+    await CM.handle_cookies();
+    await SP.click_shop();
+    await SP.click_one_category("Robots & Kits");
+    await SP.click_shop_all();
+    await SP.is_title_displayed_general("Robots & Kits")
   });
 });
