@@ -4,9 +4,16 @@ const { Home_page } = require("../pages/Home_page");
 const { Commands } = require("../support/commands");
 const { Shop_page } = require("../pages/Shop_page");
 
+// let CM;
+// let SP;
+
 test.beforeEach(async ({ page }) => {
+  // const CM = new Commands(page);
+  // const SP = new Shop_page(page);
   await page.goto(data.urls.base_url);
-  await page.getByRole("button", { name: "No, thanks" }).click();
+  await page.getByRole("button", { name: "No, thanks" }).click(); 
+  // await CM.handle_cookies();
+  // await SP.click_shop();
 });
 
 test.describe("Shop Page Tests", () => {
@@ -41,4 +48,22 @@ test.describe("Shop Page Tests", () => {
     await SP.click_shop_all();
     await SP.is_title_displayed_general("Robots & Kits")
   });
+
+  test.only('Verify that the first 5 "Brand" checkboxes function as expected', async ({page})=>{
+    const CM = new Commands(page);
+    const SP = new Shop_page(page);
+    await CM.handle_cookies();
+    await SP.click_shop();
+    await SP.click_one_category("Robots & Kits");
+    await SP.click_shop_all();
+    for(let i=0;i<5;i++){
+      const checkbox = await SP.checkBrandCheckbox(i)
+      await page.pause();
+      expect(await SP.isCheckboxChecked(checkbox)).toBeTruthy();
+      await checkbox.click();
+      await page.waitForTimeout(500);
+      await page.pause();
+      expect(await SP.isCheckboxChecked(checkbox)).toBeFalsy();
+    }
+  })
 });

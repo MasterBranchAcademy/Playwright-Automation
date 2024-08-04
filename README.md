@@ -1,6 +1,6 @@
 # README #
 
-### Robotshop automation project ###
+## Robotshop automation project <hr>
 
 * This playwright test automation is created to run on:
 
@@ -12,46 +12,63 @@
 
 * As design pattern, POM is prefered
 
-### How to set up? ###
+### How to set up? <hr>
+```bash
+npm init playwright@latest
+```
 
-* npm init playwright@latest
+### Folder structure  <hr>
 
-### Folder structure ###
+> * node_modules
+> * pages: holds web page specified methods 
+> * playwright-report
+> * support: holds hooks and custom commands
+> * test-results
+> * tests: holds actual test files
+> * .gitignore: ignore the files to commit
+> * package-lock.json
+> * package.json
+> * playwright.config.ts: playwright configuration file
+> * README.dm
 
-node_modules
-pages                           ### holds web page specified methods ###
-playwright-report
-support                         ### holds hooks and custom commands ###
-test-results
-tests                           ### holds actual test files ###
-.gitignore                      ### ignore the files to commit ###
-package-lock.json
-package.json
-playwright.config.ts            ### playwright configuration file ###
-README.dm
+### How to run tests? <hr>
 
-### How to run tests? ###
+  * Runs the end-to-end tests.
+    ```bash 
+    npx playwright test
+    ```
 
-  * npx playwright test
-    Runs the end-to-end tests.
+  * Starts the interactive UI mode.
+     ```bash 
+    npx playwright test --ui
+    ```
 
-  * npx playwright test --ui
-    Starts the interactive UI mode.
+  * Runs the tests only on Desktop Chrome.
+     ```bash 
+    npx playwright test --project=chromium
+    ```
 
-  * npx playwright test --project=chromium
-    Runs the tests only on Desktop Chrome.
+  * Runs the tests in a specific file.
+     ```bash 
+    npx playwright test example
+    ```
 
-  * npx playwright test example
-    Runs the tests in a specific file.
+  * Runs the tests in debug mode.
+    ```bash 
+    npx playwright test --debug
+    ```
 
-  * npx playwright test --debug
-    Runs the tests in debug mode.
-
-  * npx playwright codegen
-    Auto generate tests with Codegen.
+  * Auto generate tests with Codegen.
+    ```bash 
+    npx playwright codegen
+    ```
 
   * run specific env file
+    ```bash
     npx playwright test --workers=1 --ui --config=playwright.config.*dashboard*.js
+    ```
 
   * run specific test in specific file
+    ```bash
     npx playwright test --workers=1 --config=playwright.config.*marketplace.js **003_Post**.spec.js
+    ```
