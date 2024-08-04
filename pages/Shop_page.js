@@ -7,6 +7,9 @@ class Shop_page {
    */
   constructor(page) {
     this.page = page;
+    this.container_brand = page.locator(SELECTOR.SHOP.container_brand)
+    this.brandChecboxes = this.container_brand.locator(SELECTOR.SHOP.checboxes)
+    this.brandButtons = this.container_brand.locator(SELECTOR.SHOP.brands_button)
   }
 
   //CLICK
@@ -27,6 +30,17 @@ class Shop_page {
   async click_shop_all() {
     await this.page.getByRole("link", { name: "Shop All" }).click();
   }
+
+  // herbir ckeckbox'u tiklamak icin kullanabilirsiniz
+  async checkBrandCheckbox(index) {
+    const checkbox = this.brandChecboxes.nth(index);
+    await checkbox.click();
+    await this.page.waitForTimeout(500);
+    return checkbox;
+  }
+
+  
+   
 
   // ////////////////////////////////////
   async click_robot_parts() {
@@ -55,6 +69,12 @@ class Shop_page {
     const actual_title = await category_title.textContent();
     const expected_title = await this.page.locator(SELECTOR.SHOP.collection_title).textContent();
     expect(actual_title).toBe(expected_title);
+  }
+
+  // herbir checkbox, check edilip-edilmedigi kontrolu
+  async isCheckboxChecked(checkbox) {
+    return await checkbox.getAttribute('aria-checked') === 'true' ||
+           await checkbox.evaluate(el => el.classList.contains('checked-class'));
   }
 
   async is_title_displayed() {
