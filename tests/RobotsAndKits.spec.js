@@ -58,11 +58,9 @@ test.describe("Robots & Kits Category Tests", () => {
     }
   })
 
-  test.skip('Verify the count of the products from checkboxes and title', async({page})=>{
-    await SP.checkBrandCheckbox(0);
-    const expectedProductCount = await SP.getBrandProductCount(0);
-    const displayedProductCount = await SP.getProductCountFromTitle();
-    await page.pause();
-    expect(displayedProductCount).toBe(expectedProductCount);
+  test('Verify the count of the products from checkboxes and title', async({page})=>{
+    const productCount = await SP.checkBrandCheckbox(0);
+    await SP.verifyProductCount(productCount);
   })
+
 });
