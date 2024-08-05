@@ -1,27 +1,18 @@
 const { test, expect } = require("@playwright/test");
 const data = require("../tests_data/data.json");
-const { Home_page } = require("../pages/Home_page");
 const { Commands } = require("../support/commands");
 const { Shop_page } = require("../pages/Shop_page");
 
-// let CM;
-// let SP;
 
 test.beforeEach(async ({ page }) => {
-  // const CM = new Commands(page);
-  // const SP = new Shop_page(page);
   await page.goto(data.urls.base_url);
   await page.getByRole("button", { name: "No, thanks" }).click(); 
-  // await CM.handle_cookies();
-  // await SP.click_shop();
 });
 
 test.describe("Shop Page Tests", () => {
   test.beforeAll(async () => {
     test.setTimeout(60000);
   });
-
- 
 
   test.skip("The user should navigate to adapters and cables page successfully", async ({
     page,
@@ -49,7 +40,7 @@ test.describe("Shop Page Tests", () => {
     await SP.is_title_displayed_general("Robots & Kits")
   });
 
-  test.only('Verify that the first 5 "Brand" checkboxes function as expected', async ({page})=>{
+  test('Verify that the first 5 "Brand" checkboxes function as expected', async ({page})=>{
     const CM = new Commands(page);
     const SP = new Shop_page(page);
     await CM.handle_cookies();
