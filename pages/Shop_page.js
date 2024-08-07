@@ -29,6 +29,7 @@ class Shop_page {
       .click();
   }
 
+
   // herbir categorideki Shop All kismini tiklar
   async click_shop_all() {
     await this.page.getByRole("link", { name: "Shop All" }).click();
@@ -49,6 +50,7 @@ class Shop_page {
     const brandFilter = await this.brandSearchBox.fill(brandName);
     await this.page.keyboard.press('Enter');
   }
+  
 
   // istenilen Brand getirmek icin kullanilir
   async getBrandFromCheckbox(index){
