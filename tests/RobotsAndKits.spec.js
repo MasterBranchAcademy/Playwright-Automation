@@ -16,7 +16,7 @@ test.describe("Robots & Kits Category Tests", () => {
     SP = new Shop_page(page);
 
     await page.goto(data.urls.base_url);
-    await page.getByRole("button", { name: "No, thanks" }).click();
+   // await page.getByRole("button", { name: "No, thanks" }).click();
     await CM.handle_cookies();
     await SP.click_shop();
     await SP.click_one_category("Robots & Kits");

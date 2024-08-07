@@ -33,7 +33,6 @@ class Shop_page {
       .click();
   }
 
-
   // herbir categorideki Shop All kismini tiklar
   async click_shop_all() {
     await this.page.getByRole("link", { name: "Shop All" }).click();
@@ -54,7 +53,6 @@ class Shop_page {
     const brandFilter = await this.brandSearchBox.fill(brandName);
     await this.page.keyboard.press("Enter");
   }
-  
 
   // istenilen Brand getirmek icin kullanilir
   async getBrandFromCheckbox(index) {
@@ -71,17 +69,30 @@ class Shop_page {
   async getBrandProductCount(index) {
     const brandCheckbox = this.brandChecboxes.nth(index);
     await brandCheckbox.click();
-    const productCountText = await this.page.locator(SELECTOR.SHOP.brandQuantity).innerText();
+    const productCountText = await this.page
+      .locator(SELECTOR.SHOP.brandQuantity)
+      .innerText();
     const productCount = productCountText.match(/\((\d+)\)/)[1]; // Extract the number from the text
     return productCount;
   }
 
   // title kismindan urun adedini getirmek icin kullanilir
   async verifyProductCount(productCount) {
-    await expect(this.page.locator(SELECTOR.SHOP.brandQuantity)).toContainText('3'); // (${productCount})
-    await expect(this.page.locator(SELECTOR.SHOP.productCountTitle).locator('..')).toContainText(productCount);
-    const text = await this.page.locator(SELECTOR.SHOP.productCountTitle).locator('..').textContent();
-    console.log(text)
+    const text = await this.page
+      .locator(SELECTOR.SHOP.brandQuantity)
+      .first()
+      .innerText();
+
+    // Parantezleri kaldırarak sadece sayıyı döndür
+    const number = text.replace(/[()]/g, "");
+    const text2 = await this.page
+      .locator(SELECTOR.SHOP.productCountTitle)
+      .innerText();
+
+    // "Products" kelimesini kaldırarak sadece sayıyı döndür
+    const number2 = text2.replace(" Products", "").trim();
+    console.log(number2);
+    expect(number).toEqual(number2);
   }
 
   // ////////////////////////////////////
